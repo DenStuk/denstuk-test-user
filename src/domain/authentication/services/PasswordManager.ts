@@ -1,0 +1,20 @@
+const { scrypt, randomBytes } = require("crypto");
+import { promisify } from "util";
+
+const scryptAsync = promisify(scrypt);
+
+export class PasswordManager {
+    static async toHash(password: string) {
+        const salt = randomBytes(8).toString("hex");
+        const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+
+        return `${buf.toString("hex")}.${salt}`;
+    }
+
+    static async compare(hash: string, password: string) {
+        const [hashedPassword, salt] = hash.split(".");
+        const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+
+        return buf.toString("hex") === hashedPassword;
+    }
+}

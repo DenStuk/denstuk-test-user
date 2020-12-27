@@ -1,0 +1,57 @@
+[
+   {
+      "name": "default",
+      "type": "postgres",
+      "host": "localhost",
+      "port": 5432,
+      "username": "postgres",
+       "password": "postgres",
+       "database": "development_db",
+      "synchronize": true,
+      "logging": false,
+      "dropSchema": true,
+      "entities": ["src/domain/**/*.ts"],
+      "migrations": ["src/entities/**/*.ts"],
+      "subscribers": ["src/entities/**/*.ts"],
+      "cli": {
+         "entitiesDir": "src/domain/**/*.ts",
+         "migrationsDir": "src/infrastructure/data/migrations",
+         "subscribersDir": "src/subscriber"
+      }
+   },
+   {
+       "name": "development",
+       "type": "postgres",
+       "host": "localhost",
+       "port": 5432,
+       "username": "postgres",
+       "password": "postgres",
+       "database": "development_db",
+       "synchronize": true,
+       "logging": true,
+       "dropSchema": true,
+       "entities": ["src/domain/**/*.ts"],
+       "migrations": ["src/entities/**/*.ts"],
+       "subscribers": ["src/entities/**/*.ts"],
+       "cli": {
+          "entitiesDir": "src/domain/**/*.ts",
+          "migrationsDir": "src/infrastructure/data/migrations",
+          "subscribersDir": "src/subscriber"
+       }
+    },
+    {
+       "name": "production",
+       "type": "mysql",
+       "host": "localhost",
+       "port": 3306,
+       "username": "caviar_db_admin",
+       "password": "password",
+       "database": "caviar_db",
+       "synchronize": true,
+       "logging": false,
+       "dropSchema": true,
+       "entities": ["build/domain/**/*.js"],
+       "migrations": ["build/entities/**/*.js"],
+       "subscribers": ["build/entities/**/*.js"]
+    }
+ ]
